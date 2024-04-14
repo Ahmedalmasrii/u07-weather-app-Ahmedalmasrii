@@ -4,7 +4,7 @@ import Temperature from "./components/Temperature";
 function App() {
   return (
     <div className="bg-[#1F213A] h-screen flex justify-center align-top">
-      <div className="bg-blue-200 mt-40 w-1/5 h-1/3">
+      <div className=" mt-40 w-1/5 h-1/3">
         <Temperature />
         
       </div>
