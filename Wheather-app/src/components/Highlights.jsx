@@ -54,3 +54,18 @@ export default function Highlights({ stats }) {
     </div>
   );
 }
+Highlights.propTypes = {
+  // Definierar prop-typ för stats-objektet som förväntas skickas till Highlights-komponenten
+  stats: PropTypes.shape({
+    // Titeln för att visa väderförhållanden, måste vara en sträng och obligatorisk
+    title: PropTypes.string.isRequired,
+    // Värdet för det specifika väderförhållandet, kan vara antingen en sträng eller en siffra och är obligatorisk
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    // Enhet för det specifika väderförhållandet, måste vara en sträng och obligatorisk
+    unit: PropTypes.string.isRequired,
+    // Riktningen för vinden, valfritt och kan vara en sträng
+    direction: PropTypes.string,
+  }).isRequired, // Slut på PropTypes-definitionen för stats-objektet
+}; // Slut på PropTypes-definitionen för Highlights-komponenten
+
+
