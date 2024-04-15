@@ -67,7 +67,7 @@ function App() {
             direction: weatherData.current.wind_dir,
           }}
         />
-        {/* Visar luftfuktighet */}
+        {/* Visar luftfuktighet*/}
         <Highlights
           stats={{
             title: "Humidity",
