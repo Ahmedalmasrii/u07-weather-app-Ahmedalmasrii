@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Highlights from "./components/Highlights";
 import Temperature from "./components/Temperature";
@@ -8,14 +8,27 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
 
   const apiUrl = `https://api.weatherapi.com/v1/current.json?key=b7caaa4e5ba0499daec150610241504&q=${city}&aqi=no`;
-  fetch(apiUrl)
-    .then((response)=> {
-      console.log(response)
+  
+  //  useEffect-hook för att hämta väderdata baserat på vald stad
+  useEffect(()=> {
+    
+    fetch(apiUrl)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error");
+      }
+    return response.json();
     })
-    .then()
+    .then((data) => {
+      console.log(data);
+      setWeatherData(data);
+    })
+
     .catch((e) => {
       console.log(e);
     });
+
+  },[city])
 
   return (
     <div className="bg-[#1F213A] h-screen flex justify-center align-top">
