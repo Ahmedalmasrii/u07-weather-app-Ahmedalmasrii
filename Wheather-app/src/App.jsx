@@ -55,7 +55,7 @@ function App() {
       Todays highlights
     </h2>
 
-    {/* Visar Highlights-komponenterna om väderdata är tillgängligt */}
+    {/* Visar Highlights-komponenterna om väderdata är tillgängligt*/}
     {weatherData && (
       <>
         {/* Visar vindstatus */}
