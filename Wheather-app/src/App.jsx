@@ -26,12 +26,29 @@ function App() {
         console.error("Error:", error);
       }
     }
- //anrop av funtionen fetchData när det ändras stad 
+ //anrop av funtionen fetchData när det ändras stad
     fetchData();
   }, [city]);
 
   return (
-   
+    <div className="bg-[#1F213A] h-screen flex justify-center align-top">
+        <div className=" mt-40 w-1/5 h-1/3">
+    {/* Visar temperaturkomponenten om 'weatherData' är tillgängligt */}
+    {weatherData && (
+      <Temperature
+        setCity={setCity}
+        stats={{
+          temp: weatherData.current.temp_c,
+          condition: weatherData.current.condition.text,
+          isDay: weatherData.current.is_day,
+          location: weatherData.location.name,
+          time: weatherData.location.localtime,
+        }}
+      />
+    )}
+  </div>
+    </div>
+
   );
 }
 
