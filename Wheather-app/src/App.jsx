@@ -2,48 +2,36 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Highlights from "./components/Highlights";
 import Temperature from "./components/Temperature";
+// funktionen för att hämta väderdata från den egna filen api.jsx
+import { fetchWeatherData } from "./api";
 
 function App() {
-  const [city, setCity] = useState("Uppsala");
+   // Definierar stad och väderdata som states med hjälp av useState-hook
+  const [city, setCity] = useState("Stockholm");
   const [weatherData, setWeatherData] = useState(null);
 
-  const apiUrl = `https://api.weatherapi.com/v1/current.json?key=b7caaa4e5ba0499daec150610241504&q=${city}&aqi=no`;
-  
-  //  useEffect-hook för att hämta väderdata baserat på vald stad
-  useEffect(()=> {
-    
-    fetch(apiUrl)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Error");
+
+   // useEffect-hook används för att hämta väderdata när komponenten mountas eller stad ändras
+  useEffect(() => {
+    async function fetchData() {
+      try {
+      // Anropar fetchWeatherData-funktionen för att hämta väderdata för den angivna staden
+
+        const data = await fetchWeatherData(city);
+        // Uppdaterar väderdata-state med den hämtade datan
+
+        setWeatherData(data);
+      } catch (error) {
+         // error ifall något inte går rätt till vif hämtning 
+        console.error("Error:", error);
       }
-    return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      setWeatherData(data);
-    })
-
-    .catch((e) => {
-      console.log(e);
-    });
-
-  },[city])
+    }
+ //anrop av funtionen fetchData när det ändras stad 
+    fetchData();
+  }, [city]);
 
   return (
-    <div className="bg-[#1F213A] h-screen flex justify-center align-top">
-      <div className=" mt-40 w-1/5 h-1/3">
-        <Temperature />
-      </div>
-
-      <div className="mt-40 w-1/3 h-1/3 p-10 grid grid-cols-2 gap-6">
-        <h2 className="text-slate-200 text-2xl col-span-2">
-          Todays highlights
-        </h2>
-        <Highlights />
-        <Highlights /> <Highlights /> <Highlights />
-      </div>
-    </div>
+   
   );
 }
 
