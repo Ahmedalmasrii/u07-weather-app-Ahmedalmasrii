@@ -44,7 +44,54 @@ function App() {
           location: weatherData.location.name,
           time: weatherData.location.localtime,
         }}
+        
       />
+    )}
+  </div>
+  {/* Container för att visa dagens höjdpunkter i ett rutnät med två kolumner */}
+  <div className="mt-40 w-1/3 h-1/3 p-10 grid grid-cols-2 gap-6">
+    {/* Rubrik för dagens höjdpunkter */}
+    <h2 className="text-slate-200 text-2xl col-span-2">
+      Todays highlights
+    </h2>
+
+    {/* Visar Highlights-komponenterna om väderdata är tillgängligt */}
+    {weatherData && (
+      <>
+        {/* Visar vindstatus */}
+        <Highlights
+          stats={{
+            title: "Wind Status",
+            value: weatherData.current.wind_mph,
+            unit: "mph",
+            direction: weatherData.current.wind_dir,
+          }}
+        />
+        {/* Visar luftfuktighet */}
+        <Highlights
+          stats={{
+            title: "Humidity",
+            value: weatherData.current.humidity,
+            unit: "%",
+          }}
+        />
+        {/* Visar sikthet */}
+        <Highlights
+          stats={{
+            title: "Visibility",
+            value: weatherData.current.vis_miles,
+            unit: "miles",
+          }}
+        />
+        {/* Visar lufttryck */}
+        <Highlights
+          stats={{
+            title: "Air Pressure",
+            value: weatherData.current.pressure_mb,
+            unit: "mb",
+          }}
+        />
+      </>
     )}
   </div>
     </div>
