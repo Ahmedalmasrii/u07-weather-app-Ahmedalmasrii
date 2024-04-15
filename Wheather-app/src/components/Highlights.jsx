@@ -15,7 +15,42 @@ export default function Highlights({ stats }) {
         <span className="text-2xl ">{stats.unit}</span>
       </div>
 
-    
+      {/* Del för att visa vindriktning */}
+
+      {stats.direction ? (
+        <div className="mt-2 flex">
+          {/* SVG-ikon för vindriktning */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6 text-slate-200"
+          >
+            {/* Pilikon för att visa vindriktning */}
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
+            />
+          </svg>
+          {/* Text för att ange vindriktning */}
+          <div className="ms-2 text-slate-200">{stats.direction}</div>
+        </div>
+      ) : null}
+
+      {/* Del för att visa vindhastighetsmätare */}
+
+      {stats.title == "Humidity" ? (
+        <div className="w-full bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700 mt-4">
+          {/* Visuell representation av vindhastighet som en färgad streck på en grå skala */}
+          <div
+            className="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500"
+            style={{ width: `${stats.value}%` }}
+          ></div>
+        </div>
+      ) : null}
     </div>
   );
 }
