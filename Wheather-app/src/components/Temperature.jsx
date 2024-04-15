@@ -36,14 +36,15 @@ function Temperature() {
           </svg>
         </div>
       </div>
-      <div className="flex justify-center mt-8">
+      {/* moon and sun icon  */}
+      <div className="flex justify-center mt-8 text-transform scale-100 hover:scale-110 transition-transform duration-300 ease-in-out">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-16 h-16 text-yellow-300"
+          className="w-16 h-16 text-yellow-300 "
         >
           <path
             strokeLinecap="round"
@@ -57,7 +58,7 @@ function Temperature() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-14 h-14 text-slate-200 "
+          className="w-14 h-14 text-slate-200  "
         >
           <path
             strokeLinecap="round"
@@ -66,14 +67,16 @@ function Temperature() {
           />
         </svg>
       </div>
-      <div className="flex justify-center items-center text-slate-200 mt-8">
+      {/* temperatur  */}
+      <div className="flex justify-center items-center text-slate-200 mt-8 text-transform scale-100 hover:scale-110 transition-transform duration-300 ease-in-out">
         <p className="font-semibold text-[55px] ">23</p>
-        <span className="text-[33px]">°C</span>
+        <span className="text-[33px] ">°C</span>
       </div>
-
-      <div className="flex justify-center items-center text-slate-300 mt-8 text-[27px]">
+      {/* city */}
+      <div className="flex justify-center items-center text-slate-300 mt-8 text-[27px] text-transform scale-100 hover:scale-110 transition-transform duration-300 ease-in-out">
         Mist
       </div>
+      {/* todays */}
       <div className="flex justify-center text-slate-400 mt-5 text-[15px]">
         Today . 2024-04-14 0:19 | Mumbai
       </div>
