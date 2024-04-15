@@ -73,6 +73,7 @@ function Temperature({ setCity, stats }) {
           </svg>
         )}
       </div>
+
       {/* temperatur  */}
       <div className="flex justify-center items-center text-slate-200 mt-8 text-transform scale-100 hover:scale-110 transition-transform duration-300 ease-in-out">
         <p className="font-semibold text-[55px] ">{stats.temp}</p>
@@ -89,5 +90,15 @@ function Temperature({ setCity, stats }) {
     </>
   );
 }
+Temperature.propTypes = {
+  setCity: PropTypes.func.isRequired,
+  stats: PropTypes.shape({
+    temp: PropTypes.number.isRequired,
+    isDay: PropTypes.string.isRequired,
+    condition: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default Temperature;
