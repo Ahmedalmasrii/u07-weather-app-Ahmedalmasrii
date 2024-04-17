@@ -8,5 +8,5 @@ body {
     font-family: 'Times New Roman', Times, serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: gray;
+    background-color: rgba(86, 83, 83, 0.448);
 }
