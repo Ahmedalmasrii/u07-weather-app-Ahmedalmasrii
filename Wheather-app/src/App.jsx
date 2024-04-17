@@ -19,7 +19,13 @@ function App() {
   
 
   return (
-    
+
+// Denna kod skapar en container med en sökkomponent och två komponenter för väder: CurrentWeather för aktuellt väder och Forecast för väderprognos.
+    <div className="container">
+      <Search onSearchChange={handleOnSearchChange} />
+      {currentWeather && <CurrentWeather data={currentWeather} />}
+      {forecast && <Forecast data={forecast} />}
+    </div>
   );
 }
 
