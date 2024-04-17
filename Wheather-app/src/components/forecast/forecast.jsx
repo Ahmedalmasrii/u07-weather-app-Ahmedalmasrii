@@ -56,7 +56,33 @@ const Forecast = ({ data }) => {
               </AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
-             
+              <div className="daily-details-grid">
+                 {/* Visar olika detaljer om vädret för dagen */}
+                <div className="daily-details-grid-item">
+                  <label>Pressure</label>
+                  <label>{item.main.pressure} hpa</label> {/* Visar lufttrycket i hPa */}
+                </div>
+                <div className="daily-details-grid-item">
+                  <label>Humidity</label>
+                  <label>{item.main.humidity}%</label> {/* Visar luftfuktigheten i procent */}
+                </div>
+                <div className="daily-details-grid-item">
+                  <label>Clouds</label>
+                  <label>{item.clouds.all}%</label> {/* Visar molnigheten i procent */}
+                </div>
+                <div className="daily-details-grid-item">
+                  <label>Wind speed:</label>
+                  <label>{item.wind.speed} m/s</label> {/* Visar vindhastigheten i meter per sekund */}
+                </div>
+                <div className="daily-details-grid-item">
+                  <label>Sea level:</label>
+                  <label>{item.main.sea_level}m</label> {/* Visar havsnivån i meter */}
+                </div>
+                <div className="daily-details-grid-item">
+                  <label>Feels like:</label>
+                  <label>{Math.round(item.main.feels_like)}°C</label> {/* Visar känslan av temperaturen i Celsius */}
+                </div>
+              </div>
             </AccordionItemPanel>
           </AccordionItem>
         ))}
