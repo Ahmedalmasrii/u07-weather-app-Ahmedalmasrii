@@ -16,11 +16,24 @@ function App() {
 
     const forecastFetch = `${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`;
 
-  
+// denna kod gör två fetch-anrop parallellt för att hämta aktuellt väder och väderprognos.
+Promise.all([fetch(currentWeatherFetch), fetch(forecastFetch)])
+  .then(async (response) => {
+    // Konvertera svar från JSON-format till JavaScript-objekt.
+    const weatherResponse = await response[0].json();
+    const forecastResponse = await response[1].json();
+
+    // Uppdatera variabler med hämtad väderinformation och staden från sökrutan.
+    setCurrentWeather({ city: searchData.label, ...weatherResponse });
+    setforecast({ city: searchData.label, ...forecastResponse });
+  })
+  .catch((err) => console.log(err)); 
+
+  console.log(forecast);
 
   return (
+    // Denna kod skapar en container med en sökkomponent och två komponenter för väder: CurrentWeather för aktuellt väder och Forecast för väderprognos.
 
-// Denna kod skapar en container med en sökkomponent och två komponenter för väder: CurrentWeather för aktuellt väder och Forecast för väderprognos.
     <div className="container">
       <Search onSearchChange={handleOnSearchChange} />
       {currentWeather && <CurrentWeather data={currentWeather} />}
