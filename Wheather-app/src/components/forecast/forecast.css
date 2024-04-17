@@ -1,0 +1,17 @@
+.title {
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.dailty-item {
+    background-color: #f9f6f6;
+    border-radius: 15px;
+    height: 40px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px 20px;
+
+}
