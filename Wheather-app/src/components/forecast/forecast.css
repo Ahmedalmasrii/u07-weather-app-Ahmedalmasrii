@@ -19,3 +19,11 @@
 .icon-small {
     width: 40px;
 }
+
+.day {
+    color: #212121;
+    flex: 1 1;
+    font-weight: 600;
+    margin-left: 15px;
+
+}
