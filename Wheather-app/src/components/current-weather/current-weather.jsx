@@ -14,6 +14,7 @@ const CurrentWeather = ({ data }) => {
           alt="weather"
           className="weather-icon"
         />
+        
       </div>
       <div className="bottom">
         {/* ska uppdatera temp baserat på inmatat värde/stad */}
