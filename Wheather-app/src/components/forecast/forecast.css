@@ -27,3 +27,10 @@
     margin-left: 15px;
 
 }
+
+.description {
+    flex: 1 1;
+    margin-right: 13px;
+    text-align: right;
+
+}
