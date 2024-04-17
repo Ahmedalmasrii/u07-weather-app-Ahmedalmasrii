@@ -50,3 +50,19 @@
     padding: 5px 15px;
 
 }
+
+.daily-details-grid-item {
+    align-items: center;
+    display: flex;
+    height: 30px;
+    justify-content: space-between
+}
+
+.daily-details-grid-item label:first-child {
+    color: #212121;
+
+}
+
+.daily-details-grid-item label:last-child {
+    color: #212121;
+}
