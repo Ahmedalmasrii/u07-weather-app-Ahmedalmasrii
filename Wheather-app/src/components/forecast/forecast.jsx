@@ -1,4 +1,10 @@
-
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemHeading,
+    AccordionItemPanel,
+    AccordionItemButton,
+  } from "react-accessible-accordion";
 import PropTypes from "prop-types";
 import "./forecast.css";
 
@@ -27,9 +33,25 @@ const Forecast = ({ data }) => {
 
   return (
     <>
-     
+    <label className="title">Daily</label>
+      <Accordion allowZeroExpanded>
+        {data.list.splice(0, 7).map((item, idx) => (
+          <AccordionItem key={idx}>
+            <AccordionItemHeading>
+              <AccordionItemButton>
+                
+              </AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+             
+            </AccordionItemPanel>
+          </AccordionItem>
+        ))}
+      </Accordion>
     </>
   );
 };
 
+
 export default Forecast;
+
