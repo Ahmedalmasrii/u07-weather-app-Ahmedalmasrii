@@ -4,7 +4,7 @@
 }
 
 .dailty-item {
-    background-color: #f9f6f6;
+    background-color: #ffffff;
     border-radius: 15px;
     height: 40px;
     margin: 5px;
@@ -13,6 +13,7 @@
     cursor: pointer;
     font-size: 14px;
     padding: 5px 20px;
+    cursor: pointer;
 
 }
 
