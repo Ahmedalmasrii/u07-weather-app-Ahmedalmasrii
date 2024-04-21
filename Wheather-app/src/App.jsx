@@ -8,6 +8,8 @@ import Forecast from "./components/forecast/forecast";
 function App() {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setforecast] = useState(null);
+  const [isCelsius, setIsCelsius] = useState(true); // Definiera isCelsius här
+
   const handleOnSearchChange = (searchData) => {
     const [lat, lon] = searchData.value.split(" ");
 
@@ -31,12 +33,24 @@ function App() {
   };
   console.log(forecast);
 
+  console.log(currentWeather);
+
+  const handleConversion = (toCelsius) => {
+    setIsCelsius(toCelsius);
+  };
+
   return (
     // Denna kod skapar en container med en sökkomponent och två komponenter för väder: CurrentWeather för aktuellt väder och Forecast för väderprognos.
     <div className="container">
       <Search onSearchChange={handleOnSearchChange} />
-      {currentWeather && <CurrentWeather data={currentWeather} />}
-      {forecast && <Forecast data={forecast} />}
+      {currentWeather && (
+        <CurrentWeather
+          data={currentWeather}
+          handleConversion={handleConversion}
+          isCelsius={isCelsius}
+        />
+      )}
+      {forecast && <Forecast data={forecast} isCelsius={isCelsius} />}
     </div>
   );
 }
