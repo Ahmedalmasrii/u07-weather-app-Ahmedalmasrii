@@ -1,4 +1,20 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.5;
+    color: #333;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container för att centrera innehållet */
 .container {
-    max-width: 1080;
-    margin: 20px auto;
+    max-width: 1200px;
+    margin: 0 auto;
 }
