@@ -20,25 +20,27 @@ const WEEK_DAYS = [
 ];
 
 // En funktionell komponent som tar emot 'data' som props.
-
-const Forecast = ({ data }) => {
-  // Hämtar dagens index i veckodagsarrayen.
-
+const Forecast = ({ data, isCelsius }) => {
   const dayInAWeek = new Date().getDay();
-  // Skapar en ny array som börjar med dagens veckodag och fortsätter till nästa vecka.
-
-  const forecastDays = WEEK_DAYS.slice(dayInAWeek, WEEK_DAYS.length).concat(
+ 
+   // Skapar en ny array som börjar med dagens veckodag och fortsätter till nästa vecka.
+   const forecastDays = WEEK_DAYS.slice(dayInAWeek, WEEK_DAYS.length).concat(
     WEEK_DAYS.slice(0, dayInAWeek)
   );
+
+  const convertTemperature = (temp) => {
+    return isCelsius ? temp : (temp * 9) / 5 + 32;
+  };
+
   return (
     <>
       <label className="title">Daily</label>
       <Accordion allowZeroExpanded>
-        {data.list.splice(0, 7).map((item, idx) => (
+        {data.list.slice(0, 7).map((item, idx) => (
           <AccordionItem key={idx}>
             <AccordionItemHeading>
               <AccordionItemButton>
-                <div className="dailty-item">
+                <div className="daily-item">
                   <img
                     src={`icons/${item.weather[0].icon}.png`}
                     alt="weather"
@@ -49,44 +51,37 @@ const Forecast = ({ data }) => {
                     {item.weather[0].description}
                   </label>
                   <label className="min-max">
-                    {Math.round(item.main.temp_min)}°C /
-                    {Math.round(item.main.temp_max)}°C
+                    {Math.round(convertTemperature(item.main.temp_min))}{isCelsius ? '°C' : '°F'} /
+                    {Math.round(convertTemperature(item.main.temp_max))}{isCelsius ? '°C' : '°F'}
                   </label>
                 </div>
               </AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
               <div className="daily-details-grid">
-                {/* Visar olika detaljer om vädret för dagen */}
                 <div className="daily-details-grid-item">
                   <label>Pressure</label>
-                  <label>{item.main.pressure} hpa</label>{" "}
-                  {/* Visar lufttrycket i hPa */}
+                  <label>{item.main.pressure} hpa</label>
                 </div>
                 <div className="daily-details-grid-item">
                   <label>Humidity</label>
-                  <label>{item.main.humidity}%</label>{" "}
-                  {/* Visar luftfuktigheten i procent */}
+                  <label>{item.main.humidity}%</label>
                 </div>
                 <div className="daily-details-grid-item">
                   <label>Clouds</label>
-                  <label>{item.clouds.all}%</label>{" "}
-                  {/* Visar molnigheten i procent */}
+                  <label>{item.clouds.all}%</label>
                 </div>
                 <div className="daily-details-grid-item">
-                  <label>Wind speed:</label>
-                  <label>{item.wind.speed} m/s</label>{" "}
-                  {/* Visar vindhastigheten i meter per sekund */}
+                  <label>Wind speed</label>
+                  <label>{item.wind.speed} m/s</label>
                 </div>
                 <div className="daily-details-grid-item">
-                  <label>Sea level:</label>
-                  <label>{item.main.sea_level}m</label>{" "}
-                  {/* Visar havsnivån i meter */}
+                  <label>Sea level</label>
+                  <label>{item.main.sea_level}m</label>
                 </div>
                 <div className="daily-details-grid-item">
-                  <label>Feels like:</label>
-                  <label>{Math.round(item.main.feels_like)}°C</label>{" "}
-                  {/* Visar känslan av temperaturen i Celsius */}
+                  <label>Feels like</label>
+                  <label>{Math.round(convertTemperature(item.main.feels_like))}{isCelsius ? '°C' : '°F'}</label>
                 </div>
               </div>
             </AccordionItemPanel>
@@ -99,8 +94,32 @@ const Forecast = ({ data }) => {
 
 Forecast.propTypes = {
   data: PropTypes.shape({
-    list: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    list: PropTypes.arrayOf(
+      PropTypes.shape({
+        main: PropTypes.shape({
+          temp_min: PropTypes.number.isRequired,
+          temp_max: PropTypes.number.isRequired,
+          pressure: PropTypes.number.isRequired,
+          humidity: PropTypes.number.isRequired,
+          sea_level: PropTypes.number,
+          feels_like: PropTypes.number.isRequired,
+        }).isRequired,
+        weather: PropTypes.arrayOf(
+          PropTypes.shape({
+            description: PropTypes.string.isRequired,
+            icon: PropTypes.string.isRequired,
+          })
+        ).isRequired,
+        clouds: PropTypes.shape({
+          all: PropTypes.number.isRequired,
+        }).isRequired,
+        wind: PropTypes.shape({
+          speed: PropTypes.number.isRequired,
+        }).isRequired,
+      })
+    ).isRequired,
   }).isRequired,
+  isCelsius: PropTypes.bool.isRequired,
 };
 
 export default Forecast;
