@@ -53,7 +53,6 @@ const CurrentWeather = ({ data, handleConversion, isCelsius }) => {
               {isCelsius ? "°C" : "°F"}
             </span>
           </div>
-
           {/* visar det är vind eller inte */}
           <div className="parameter-row">
             <span className="parameter-label">Wind</span>
