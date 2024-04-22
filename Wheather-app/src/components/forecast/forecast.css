@@ -3,7 +3,7 @@ label {
 }
 
 .accordion__button {
-    background-color: #fff;
+    background-image: linear-gradient(to top, lightgrey 3%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
     padding: 10px;
     margin-bottom: 10px;
     border: none;
@@ -53,6 +53,7 @@ label {
 .daily-details-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    width: auto;
     gap: 10px;
     background-color: #f9f9f9;
     padding: 10px;
