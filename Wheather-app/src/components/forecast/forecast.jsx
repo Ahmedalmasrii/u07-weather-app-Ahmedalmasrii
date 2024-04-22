@@ -22,9 +22,8 @@ const WEEK_DAYS = [
 // En funktionell komponent som tar emot 'data' som props.
 const Forecast = ({ data, isCelsius }) => {
   const dayInAWeek = new Date().getDay();
- 
-   // Skapar en ny array som börjar med dagens veckodag och fortsätter till nästa vecka.
-   const forecastDays = WEEK_DAYS.slice(dayInAWeek, WEEK_DAYS.length).concat(
+  // Skapar en ny array som börjar med dagens veckodag och fortsätter till nästa vecka.
+  const forecastDays = WEEK_DAYS.slice(dayInAWeek, WEEK_DAYS.length).concat(
     WEEK_DAYS.slice(0, dayInAWeek)
   );
 
@@ -51,8 +50,10 @@ const Forecast = ({ data, isCelsius }) => {
                     {item.weather[0].description}
                   </label>
                   <label className="min-max">
-                    {Math.round(convertTemperature(item.main.temp_min))}{isCelsius ? '°C' : '°F'} /
-                    {Math.round(convertTemperature(item.main.temp_max))}{isCelsius ? '°C' : '°F'}
+                    {Math.round(convertTemperature(item.main.temp_min))}
+                    {isCelsius ? "°C" : "°F"} /
+                    {Math.round(convertTemperature(item.main.temp_max))}
+                    {isCelsius ? "°C" : "°F"}
                   </label>
                 </div>
               </AccordionItemButton>
@@ -81,7 +82,10 @@ const Forecast = ({ data, isCelsius }) => {
                 </div>
                 <div className="daily-details-grid-item">
                   <label>Feels like:</label>
-                  <label>{Math.round(convertTemperature(item.main.feels_like))}{isCelsius ? '°C' : '°F'}</label>
+                  <label>
+                    {Math.round(convertTemperature(item.main.feels_like))}
+                    {isCelsius ? "°C" : "°F"}
+                  </label>
                 </div>
               </div>
             </AccordionItemPanel>
