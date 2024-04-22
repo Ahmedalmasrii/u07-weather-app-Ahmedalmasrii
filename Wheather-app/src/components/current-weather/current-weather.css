@@ -58,7 +58,6 @@
 
 button {
     background-color: #008f68;
-
     color: white;
     padding: 10px 15px;
     border: none;
@@ -68,6 +67,20 @@ button {
     margin-top: 10px;
     transition: background 0.3s;
 }
+.button-container {
+    display: flex;
+    justify-content: center; 
+  }
+
+  button.btn {
+    border: 2px solid gray;
+    background-color: antiquewhite;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  
+  
+
 
 button:hover {
     background-color: #007a58;
