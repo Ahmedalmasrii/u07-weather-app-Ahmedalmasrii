@@ -33,7 +33,12 @@ function App() {
 
         // Uppdaterar variabler med hämtad väderinformation och staden från  själva sökdata.
 
-        setCurrentWeather({ city: searchData.label,sunrise,sunset, ...weatherResponse });
+        setCurrentWeather({
+          city: searchData.label,
+          sunrise,
+          sunset,
+          ...weatherResponse,
+        });
         setforecast({ city: searchData.label, ...forecastResponse });
       })
       .catch((err) => console.log(err));
@@ -45,10 +50,40 @@ function App() {
   const handleConversion = (toCelsius) => {
     setIsCelsius(toCelsius);
   };
+  const getCurrentLocation = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          handleOnSearchChange({
+            value: `${latitude} ${longitude}`,
+            label: "Current Location",
+          });
+        },
+        (error) => {
+          console.error("Error getting location: ", error);
+          alert("Error getting location: " + error.message);
+        }
+      );
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  };
 
   return (
     // Denna kod skapar en container med en sökkomponent och två komponenter för väder: CurrentWeather för aktuellt väder och Forecast för väderprognos.
     <div className="container">
+      <div className="locationbtn">
+        <button className="lcbtn" onClick={getCurrentLocation}>
+          Current Location
+          <img
+          src={`/icons/location-icon.png`}
+          alt="location"
+          className="location-icon lcimg"
+        />
+        </button>
+     
+      </div>
       <Search onSearchChange={handleOnSearchChange} />
       {currentWeather && (
         <CurrentWeather
