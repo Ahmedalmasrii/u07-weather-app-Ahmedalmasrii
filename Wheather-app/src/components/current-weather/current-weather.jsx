@@ -70,6 +70,14 @@ const CurrentWeather = ({ data, handleConversion, isCelsius }) => {
             <span className="parameter-label">Pressure</span>
             <span className="parameter-value">{data.main.pressure} hpa</span>
           </div>
+          <div className="parameter-row">
+            <span className="parameter-label">Sunrise</span>
+            <span className="parameter-value">{data.sunrise}</span>
+          </div>
+          <div className="parameter-row">
+            <span className="parameter-label">Sunset</span>
+            <span className="parameter-value">{data.sunset}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -94,6 +102,8 @@ CurrentWeather.propTypes = {
     wind: PropTypes.shape({
       speed: PropTypes.number.isRequired,
     }).isRequired,
+    sunrise: PropTypes.string.isRequired, 
+    sunset: PropTypes.string.isRequired, 
   }).isRequired,
 
   handleConversion: PropTypes.func.isRequired,
