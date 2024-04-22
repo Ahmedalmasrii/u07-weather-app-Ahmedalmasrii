@@ -35,9 +35,11 @@ const CurrentWeather = ({ data, handleConversion, isCelsius }) => {
             ? `${Math.round(data.main.temp)}°C`
             : `${Math.round((data.main.temp * 9) / 5 + 32)}°F`}
         </p>
-        <button onClick={toggleUnit}>
-          {isCelsius ? "Convert to Fahrenheit" : "Convert to Celsius"}
-        </button>
+        <div className="button-container">
+          <button className="btn" onClick={toggleUnit}>
+            {isCelsius ? "Convert to Fahrenheit" : "Convert to Celsius"}
+          </button>
+        </div>
 
         <div className="details">
           <div className="parameter-row">
