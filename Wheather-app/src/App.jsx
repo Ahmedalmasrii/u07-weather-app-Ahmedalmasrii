@@ -76,12 +76,11 @@ function App() {
         <button className="lcbtn" onClick={getCurrentLocation}>
           Current Location
           <img
-          src={`/icons/location-icon.png`}
-          alt="location"
-          className="location-icon lcimg"
-        />
+            src={`/icons/location-icon.png`}
+            alt="location"
+            className="location-icon lcimg"
+          />
         </button>
-     
       </div>
       <Search onSearchChange={handleOnSearchChange} />
       {currentWeather && (
