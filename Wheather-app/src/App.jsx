@@ -23,10 +23,17 @@ function App() {
         // omvandlar svar från JSON-format till JavaScript-objekt.
 
         const weatherResponse = await response[0].json();
+        const sunrise = new Date(
+          weatherResponse.sys.sunrise * 1000
+        ).toLocaleTimeString();
+        const sunset = new Date(
+          weatherResponse.sys.sunset * 1000
+        ).toLocaleTimeString();
         const forecastResponse = await response[1].json();
+
         // Uppdaterar variabler med hämtad väderinformation och staden från  själva sökdata.
 
-        setCurrentWeather({ city: searchData.label, ...weatherResponse });
+        setCurrentWeather({ city: searchData.label,sunrise,sunset, ...weatherResponse });
         setforecast({ city: searchData.label, ...forecastResponse });
       })
       .catch((err) => console.log(err));
