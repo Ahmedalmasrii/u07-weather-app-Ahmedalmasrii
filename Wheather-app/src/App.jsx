@@ -21,7 +21,6 @@ function App() {
     Promise.all([fetch(currentWeatherFetch), fetch(forecastFetch)])
       .then(async (response) => {
         // omvandlar svar från JSON-format till JavaScript-objekt.
-
         const weatherResponse = await response[0].json();
         const sunrise = new Date(
           weatherResponse.sys.sunrise * 1000
