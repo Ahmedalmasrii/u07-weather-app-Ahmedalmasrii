@@ -3,7 +3,7 @@ label {
 }
 
 .accordion__button {
-    background-image: linear-gradient(to top, lightgrey 3%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
+   background: #f9f9f9db;
     padding: 10px;
     margin-bottom: 10px;
     border: none;
