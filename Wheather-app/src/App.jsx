@@ -38,7 +38,11 @@ function App() {
           sunset,
           ...weatherResponse,
         });
-        setforecast({ city: searchData.label, ...forecastResponse });
+        setforecast({
+          city: searchData.label,
+          daily: forecastResponse.daily,
+          ...forecastResponse,
+        });
       })
       .catch((err) => console.log(err));
   };
