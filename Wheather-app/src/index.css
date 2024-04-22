@@ -10,3 +10,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background-color: rgba(187, 165, 165, 0.448);
 }
+.app-title {
+    display: flex;
+    justify-content: center;
+    font-size: xx-large;
+    font-style: italic;
+
+}
