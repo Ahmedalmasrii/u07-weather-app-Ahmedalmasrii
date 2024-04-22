@@ -1,6 +1,7 @@
 label {
     margin-right: 10px;
 }
+
 .accordion__button {
     background-color: #fff;
     padding: 10px;
@@ -9,10 +10,11 @@ label {
     text-align: left;
     width: 100%;
     transition: background-color 0.3s;
+    border-radius: 20px;
 }
 
 .accordion__button:hover {
-    background-color: #f0f0f0;
+    background-color: #a9f7c3;
 }
 
 .daily-item {
@@ -22,10 +24,11 @@ label {
     padding: 10px;
     border-radius: 8px;
 }
+
 .title {
     display: flex;
     justify-content: center;
-    font-size:xx-large;
+    font-size: xx-large;
     font-weight: 600;
 }
 
@@ -55,6 +58,7 @@ label {
     padding: 10px;
     border-radius: 8px;
     margin-bottom: 10px;
+    border-radius: 20px;
 }
 
 .daily-details-grid-item {
@@ -64,7 +68,7 @@ label {
     align-items: center;
     background-image: linear-gradient(to top, lightgrey 3%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%);
     border-radius: 50px;
-    
+
 }
 
 /* Små justeringar för responsivitet */
@@ -73,6 +77,6 @@ label {
     .daily-item,
     .daily-details-grid-item {
         flex-direction: column;
-       
+
     }
 }
