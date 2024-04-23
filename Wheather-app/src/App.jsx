@@ -7,59 +7,61 @@ import Forecast from "./components/forecast/forecast";
 
 function App() {
   const [currentWeather, setCurrentWeather] = useState(null);
-  const [forecast, setforecast] = useState(null);
-  const [isCelsius, setIsCelsius] = useState(true); // Definiera isCelsius här
+  const [forecast, setForecast] = useState(null);
+  const [isCelsius, setIsCelsius] = useState(true);
+  const [hourlyData, setHourlyData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOnSearchChange = (searchData) => {
+    setIsLoading(true);
     const [lat, lon] = searchData.value.split(" ");
 
     const currentWeatherFetch = `${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`;
     const forecastFetch = `${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`;
 
-    // Utför två fetch-anrop parallellt för att hämta aktuellt väder och väderprognos.
-
     Promise.all([fetch(currentWeatherFetch), fetch(forecastFetch)])
-      .then(async (response) => {
-        // omvandlar svar från JSON-format till JavaScript-objekt.
-        const weatherResponse = await response[0].json();
+      .then(async ([currentResponse, forecastResponse]) => {
+        if (!currentResponse.ok || !forecastResponse.ok) {
+          throw new Error("Problem fetching weather data");
+        }
+        const weatherData = await currentResponse.json();
+        const forecastData = await forecastResponse.json();
         const sunrise = new Date(
-          weatherResponse.sys.sunrise * 1000
+          weatherData.sys.sunrise * 1000
         ).toLocaleTimeString();
         const sunset = new Date(
-          weatherResponse.sys.sunset * 1000
+          weatherData.sys.sunset * 1000
         ).toLocaleTimeString();
-        const forecastResponse = await response[1].json();
-
-        // Uppdaterar variabler med hämtad väderinformation och staden från  själva sökdata.
-
         setCurrentWeather({
+          ...weatherData,
           city: searchData.label,
           sunrise,
           sunset,
-          ...weatherResponse,
         });
-        setforecast({
-          city: searchData.label,
-          daily: forecastResponse.daily,
-          ...forecastResponse,
-        });
-      })
-      .catch((err) => console.log(err));
-  };
-  console.log(forecast);
 
-  console.log(currentWeather);
+        setHourlyData(forecastData.list.slice(0, 4));
+
+        setForecast({ ...forecastData, city: searchData.label });
+      })
+      .catch((err) => {
+        console.error("Error fetching weather data: ", err);
+        alert("An error occurred while fetching the weather data.");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   const handleConversion = (toCelsius) => {
     setIsCelsius(toCelsius);
   };
+
   const getCurrentLocation = () => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const { latitude, longitude } = position.coords;
           handleOnSearchChange({
-            value: `${latitude} ${longitude}`,
+            value: `${position.coords.latitude} ${position.coords.longitude}`,
             label: "Current Location",
           });
         },
@@ -74,7 +76,7 @@ function App() {
   };
 
   return (
-    // Denna kod skapar en container med en sökkomponent och två komponenter för väder: CurrentWeather för aktuellt väder och Forecast för väderprognos.
+   // Denna kod skapar en container med en sökkomponent och två komponenter för väder: CurrentWeather för aktuellt väder och Forecast för väderprognos.
     <div className="container">
       <div className="locationbtn">
         <button className="lcbtn" onClick={getCurrentLocation}>
@@ -87,14 +89,21 @@ function App() {
         </button>
       </div>
       <Search onSearchChange={handleOnSearchChange} />
-      {currentWeather && (
-        <CurrentWeather
-          data={currentWeather}
-          handleConversion={handleConversion}
-          isCelsius={isCelsius}
-        />
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          {currentWeather && (
+            <CurrentWeather
+              data={currentWeather}
+              handleConversion={handleConversion}
+              isCelsius={isCelsius}
+              hourlyData={hourlyData} // Pass hourly data to the component
+            />
+          )}
+          {forecast && <Forecast data={forecast} isCelsius={isCelsius} />}
+        </>
       )}
-      {forecast && <Forecast data={forecast} isCelsius={isCelsius} />}
     </div>
   );
 }
