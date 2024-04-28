@@ -27,12 +27,12 @@
 
 .weather-icon {
     width: 80px;
-  
+
 }
 
 .temperature {
     font-size: 50px;
-   
+
     margin: 10px 0;
 
 }
@@ -67,21 +67,40 @@ button {
     margin-top: 10px;
     transition: background 0.3s;
 }
+
 .button-container {
     display: flex;
-    justify-content: center; 
-  }
+    justify-content: center;
+}
 
-  button.btn {
+button.btn {
     border: 2px solid gray;
     background-color: antiquewhite;
     padding: 5px;
     margin-bottom: 10px;
-  }
-  
-  
+}
+
+
 
 
 button:hover {
     background-color: #007a58;
+}
+
+
+
+.hourly-details{
+
+    display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+}
+
+
+
+.hourly-item {
+    border: 1px solid black;
+    margin: 10px;
+    border-radius: 30px;
+    padding: 20px;
 }
